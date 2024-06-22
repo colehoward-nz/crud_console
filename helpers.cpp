@@ -74,7 +74,6 @@ void read_line(const int line, const std::string& file)
 
 void update_line(int line, const std::string& file, const std::string& text)
 {
-    // don't kill me
     if (!valid_input(file))
     {
         std::cout << "MUNKE_CRUD_CONSOLE illinformed name" << std::endl;
@@ -88,6 +87,7 @@ void update_line(int line, const std::string& file, const std::string& text)
         return;
     }
 
+    // don't kill me - gotta be a better way then just coping the entire file lol
     std::vector<std::string> lines;
     std::string temp;
     while (std::getline(checkf, temp))
@@ -96,6 +96,32 @@ void update_line(int line, const std::string& file, const std::string& text)
     }
 
     checkf.close();
+
+    if (line <= 0 || line > lines.size())
+    {
+        std::cout << "MUNKE_CRUD_CONSOLE ran out of lines";
+        checkf.close();
+        return;
+    }
+
+    lines[line-1] = text;
+
+    std::ofstream outputf (file);
+    if (!outputf)
+    {
+        std::cout << "MUNKE_CRUD_CONSOLE file not found";
+        outputf.close();
+        return;
+    }
+
+    for (const auto& line : lines)
+    {
+        outputf << line << std::endl;
+    }
+
+    std::cout << "MUNKE_CRUD_CONSOLE replaced line";
+    outputf.close();
+    return;
 }
 
 

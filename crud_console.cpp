@@ -20,6 +20,7 @@ void menu()
 int main()
 {   
     std::string filename;
+    std::string text;
     int line;
     
     int cont = 1;
@@ -41,6 +42,16 @@ int main()
                 std::cout << "Enter a line number: ";
                 std::cin >> line;
                 read_line(line, filename);
+                break;
+            case 2:
+                std::cout << "Enter a filename: ";
+                std::cin >> filename;
+                std::cout << "Enter a line number: ";
+                std::cin >> line;
+                std::cin.ignore();
+                std::cout << "Enter the changed content: ";
+                std::cin >> text;
+                update_line(line, filename, text);
                 break;
             case 3:
                 std::cout << "Enter a filename: ";
